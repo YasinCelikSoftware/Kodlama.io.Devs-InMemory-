@@ -18,13 +18,18 @@ public class CodeLanguageManager implements CodeLanguageService {
 
     @Override
     public List<CodeLanguage> getAll() {
+
         return codeLanguageRepository.getAll();
+
     }
 
     @Override
     public void save(CodeLanguage codeLanguage) {
-        if (CodeLanguageNameValidator(codeLanguage) && CodeLanguageExistValidator(codeLanguage)) {
+
+        if (codeLanguageNameValidator(codeLanguage) && codeLanguageExistValidator(codeLanguage)) {
+
             codeLanguageRepository.save(codeLanguage);
+
         }
     }
 
@@ -37,12 +42,11 @@ public class CodeLanguageManager implements CodeLanguageService {
 
     @Override
     public void update(CodeLanguage codeLanguage, String updatedName) {
-        if (!updatedName.isEmpty() && !CodeLanguageExistValidator(codeLanguage)) {
+        if (!updatedName.isEmpty() && !codeLanguageExistValidator(codeLanguage)) {
 
             codeLanguageRepository.update(codeLanguage, updatedName);
 
-        } else
-            System.out.println("This language name is empty or blank.");
+        }
     }
 
     @Override
@@ -54,14 +58,14 @@ public class CodeLanguageManager implements CodeLanguageService {
 
 
 
-    public boolean CodeLanguageNameValidator(CodeLanguage codeLanguage) {
+    public boolean codeLanguageNameValidator(CodeLanguage codeLanguage) {
 
         System.out.println("This language name is empty or blank.");
         return !codeLanguage.getName().isEmpty();
 
     }
 
-    public boolean CodeLanguageExistValidator(CodeLanguage codeLanguage) {
+    public boolean codeLanguageExistValidator(CodeLanguage codeLanguage) {
 
         for (CodeLanguage tempCodeLanguage : codeLanguageRepository.getAll()) {
             if (tempCodeLanguage.getName().equalsIgnoreCase(codeLanguage.getName())) {
